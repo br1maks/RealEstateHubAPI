@@ -1,8 +1,9 @@
 from .base import Base
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, DateTime, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey, DateTime, Text
 from datetime import datetime
 from sqlalchemy.types import Enum as SQLEnum
+from .user import User
 import enum
 
 class NotificationTypeEnum(enum.Enum):
@@ -18,3 +19,5 @@ class Notification(Base):
     message: Mapped[str] = mapped_column(Text, nullable=False)
     read: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
+
+    user: Mapped["User"] = relationship(back_populates="notifications")

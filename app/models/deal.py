@@ -1,10 +1,17 @@
 import enum
 from .base import Base
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Integer, ForeignKey, Float, DateTime
 from datetime import datetime
 from sqlalchemy.types import Enum as SQLEnum
-from typing import Optional
+from typing import Optional, List
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .user import User
+    from .property import Property
+    from .review import Review
+    from .message import Message
 
 class DealStatusEnum(enum.Enum):
     pending = "pending"
@@ -22,3 +29,8 @@ class Deal(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     rent_duration: Mapped[Optional[int]] = mapped_column(Integer)
     deposit: Mapped[Optional[int]] = mapped_column(Float)
+
+    property: Mapped["Property"] = relationship(back_populates="deals")
+    buyer: Mapped["User"] = relationship(back_populates="deals")
+    reviews: Mapped[List["Review"]] = relationship(back_populates="deal")
+    messages: Mapped[List["Message"]] = relationship(back_populates="deal")
