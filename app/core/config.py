@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        env_nested_delimiter = "__"  # Поддержка вложенных ключей (e.g., db__url)
 
 settings = Settings()
 "разобраться с енв и что туда добавлять, расспросить норамльный ли код"

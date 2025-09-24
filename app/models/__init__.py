@@ -11,6 +11,7 @@ from .favorite import Favorite
 from .amenity import Amenity
 from .category import Category
 from .profile import Profile
+from .view import View
 from .property_amenity_assoc import PropertyAmenity
 __all__ = (
     "User",
@@ -27,4 +28,5 @@ __all__ = (
     "Amenity",
     "Profile",
     "PropertyAmenity",
+    "View",
 )

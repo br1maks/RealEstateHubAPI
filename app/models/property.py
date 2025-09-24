@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from .amenity import Amenity
     from .category import Category
     from .photo import Photo
-
+    from .property_amenity_assoc import PropertyAmenity
 
 class PropertyTypeEnum(enum.Enum):
     apartment = "apartment"
@@ -50,7 +50,6 @@ class Property(Base):
     favorites: Mapped[List["Favorite"]] = relationship(back_populates="property")
     views_list: Mapped[List["View"]] = relationship(back_populates="property")
     # Many-to-many
-    amenitys: Mapped[List["Amenity"]] = relationship(secondary="property_amenity_assoc",
-                                                      back_populates="propertys")
+    amenity_assocs: Mapped[List["PropertyAmenity"]] = relationship(back_populates="property")
     # One-to-many
     category: Mapped["Category"] = relationship(back_populates="propertys")
