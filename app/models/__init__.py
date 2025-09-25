@@ -1,7 +1,7 @@
 from .base import Base
 from .user import User
 from .deal import Deal
-from .property import Property
+from .property import Property, PropertyTypeEnum
 from .review import Review
 from .notification import Notification
 from .task import Task
@@ -29,4 +29,5 @@ __all__ = (
     "Profile",
     "PropertyAmenity",
     "View",
+    "PropertyTypeEnum",
 )
